@@ -1,0 +1,200 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Shift Calendar//Sathiesh M//EN
+BEGIN:VEVENT
+DTSTART;TZID=Asia/Kolkata:20260401T060000
+DTEND;TZID=Asia/Kolkata:20260401T153000
+SUMMARY:S1 (06:00–15:30)
+DESCRIPTION:Colleagues in same shift:\n- Lakshmi Prasanna\n- Shashi Patil\n\nPrevious shift:\n\nNext shift:\n- Tamanna Tyagi\n- Lalit Kumar\n- Mitali Jha\n- Chamundi P\n- Diksha\n- Nirmalraj C\n- Hansika S
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Asia/Kolkata:20260402T060000
+DTEND;TZID=Asia/Kolkata:20260402T153000
+SUMMARY:S1 (06:00–15:30)
+DESCRIPTION:Colleagues in same shift:\n- Lakshmi Prasanna\n- Shashi Patil\n- Poojitha Sankrana\n\nPrevious shift:\n- Kundan Verma\n- Supreetha\n- Adhila P\n\nNext shift:\n- Tamanna Tyagi\n- Lalit Kumar\n- Mitali Jha\n- Diksha\n- Hansika S
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Asia/Kolkata:20260403T060000
+DTEND;TZID=Asia/Kolkata:20260403T153000
+SUMMARY:S1 (06:00–15:30)
+DESCRIPTION:Colleagues in same shift:\n- Shashi Patil\n- Poojitha Sankrana\n\nPrevious shift:\n- Kundan Verma\n- Supreetha\n- Adhila P\n\nNext shift:\n- Lalit Kumar\n- Mitali Jha\n- Diksha\n- Nirmalraj C\n- Hansika S
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20260404
+DTEND;VALUE=DATE:20260405
+SUMMARY:Off
+DESCRIPTION:Working colleagues today:\n- Abishek Selvaraj (S3)\n- Tamanna Tyagi (S3)\n- Lalit Kumar (S2)\n- Mitali Jha (S2)\n- Poojitha Sankrana (S1)\n- Chamundi P (S1)\n- Nirmalraj C (EVE)
+COLOR:#33B679
+X-GOOGLE-CALENDAR-COLOR:#33B679
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20260405
+DTEND;VALUE=DATE:20260406
+SUMMARY:Off
+DESCRIPTION:Working colleagues today:\n- Lakshmi Prasanna (S2)\n- Abishek Selvaraj (S3)\n- Tamanna Tyagi (S3)\n- Lalit Kumar (S2)\n- Mitali Jha (S2)\n- Poojitha Sankrana (S1)\n- Chamundi P (S1)
+COLOR:#33B679
+X-GOOGLE-CALENDAR-COLOR:#33B679
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Asia/Kolkata:20260406T140000
+DTEND;TZID=Asia/Kolkata:20260406T233000
+SUMMARY:S2 (14:00–23:30)
+DESCRIPTION:Colleagues in same shift:\n- Lakshmi Prasanna\n- Shashi Patil\n- Adhila P\n- Nirmalraj C\n- Hansika S\n\nPrevious shift:\n- Poojitha Sankrana\n- Chamundi P\n- Diksha\n- Supreetha\n\nNext shift:\n- Abishek Selvaraj
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Asia/Kolkata:20260407T140000
+DTEND;TZID=Asia/Kolkata:20260407T233000
+SUMMARY:S2 (14:00–23:30)
+DESCRIPTION:Colleagues in same shift:\n- Lakshmi Prasanna\n- Shashi Patil\n- Adhila P\n- Nirmalraj C\n- Hansika S\n\nPrevious shift:\n- Kundan Verma\n- Diksha\n- Supreetha\n\nNext shift:\n- Abishek Selvaraj
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Asia/Kolkata:20260408T140000
+DTEND;TZID=Asia/Kolkata:20260408T233000
+SUMMARY:S2 (14:00–23:30)
+DESCRIPTION:Colleagues in same shift:\n- Lakshmi Prasanna\n- Tamanna Tyagi\n- Shashi Patil\n- Mitali Jha\n- Adhila P\n- Nirmalraj C\n- Hansika S\n\nPrevious shift:\n- Kundan Verma\n- Lalit Kumar\n- Chamundi P\n- Diksha\n- Supreetha\n\nNext shift:\n- Abishek Selvaraj
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Asia/Kolkata:20260409T140000
+DTEND;TZID=Asia/Kolkata:20260409T233000
+SUMMARY:S2 (14:00–23:30)
+DESCRIPTION:Colleagues in same shift:\n- Lakshmi Prasanna\n- Tamanna Tyagi\n- Mitali Jha\n- Adhila P\n- Nirmalraj C\n- Hansika S\n\nPrevious shift:\n- Kundan Verma\n- Lalit Kumar\n- Chamundi P\n- Diksha\n- Supreetha\n\nNext shift:\n- Poojitha Sankrana
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Asia/Kolkata:20260410T140000
+DTEND;TZID=Asia/Kolkata:20260410T233000
+SUMMARY:S2 (14:00–23:30)
+DESCRIPTION:Colleagues in same shift:\n- Tamanna Tyagi\n- Mitali Jha\n- Adhila P\n- Nirmalraj C\n- Hansika S\n\nPrevious shift:\n- Kundan Verma\n- Lalit Kumar\n- Chamundi P\n- Supreetha\n\nNext shift:\n- Poojitha Sankrana
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20260411
+DTEND;VALUE=DATE:20260412
+SUMMARY:Off
+DESCRIPTION:Working colleagues today:\n- Abishek Selvaraj (S2)\n- Kundan Verma (S1)\n- Lalit Kumar (S1)\n- Shashi Patil (S1)\n- Mitali Jha (S2)\n- Poojitha Sankrana (S3)\n- Diksha (S3)\n- Hansika S (EVE)
+COLOR:#33B679
+X-GOOGLE-CALENDAR-COLOR:#33B679
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20260412
+DTEND;VALUE=DATE:20260413
+SUMMARY:Off
+DESCRIPTION:Working colleagues today:\n- Lakshmi Prasanna (S1)\n- Abishek Selvaraj (S2)\n- Shashi Patil (S1)\n- Mitali Jha (S2)\n- Poojitha Sankrana (S3)\n- Diksha (S3)
+COLOR:#33B679
+X-GOOGLE-CALENDAR-COLOR:#33B679
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Asia/Kolkata:20260413T220000
+DTEND;TZID=Asia/Kolkata:20260414T073000
+SUMMARY:S3 (22:00–07:30)
+DESCRIPTION:Colleagues in same shift:\n\nPrevious shift:\n- Abishek Selvaraj\n- Tamanna Tyagi\n- Lalit Kumar\n- Supreetha\n- Nirmalraj C\n- Hansika S\n\nNext shift:\n- Lakshmi Prasanna\n- Shashi Patil\n- Chamundi P\n- Adhila P
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Asia/Kolkata:20260414T220000
+DTEND;TZID=Asia/Kolkata:20260415T073000
+SUMMARY:S3 (22:00–07:30)
+DESCRIPTION:Colleagues in same shift:\n\nPrevious shift:\n- Abishek Selvaraj\n- Tamanna Tyagi\n- Lalit Kumar\n- Supreetha\n- Hansika S\n\nNext shift:\n- Lakshmi Prasanna\n- Kundan Verma\n- Shashi Patil\n- Diksha\n- Adhila P
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Asia/Kolkata:20260415T220000
+DTEND;TZID=Asia/Kolkata:20260416T073000
+SUMMARY:S3 (22:00–07:30)
+DESCRIPTION:Colleagues in same shift:\n\nPrevious shift:\n- Abishek Selvaraj\n- Tamanna Tyagi\n- Lalit Kumar\n- Mitali Jha\n- Poojitha Sankrana\n- Supreetha\n- Nirmalraj C\n- Hansika S\n\nNext shift:\n- Kundan Verma\n- Diksha\n- Adhila P
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Asia/Kolkata:20260416T220000
+DTEND;TZID=Asia/Kolkata:20260417T073000
+SUMMARY:S3 (22:00–07:30)
+DESCRIPTION:Colleagues in same shift:\n\nPrevious shift:\n- Tamanna Tyagi\n- Lalit Kumar\n- Mitali Jha\n- Poojitha Sankrana\n- Supreetha\n- Nirmalraj C\n- Hansika S\n\nNext shift:\n- Kundan Verma\n- Shashi Patil\n- Diksha\n- Adhila P
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Asia/Kolkata:20260417T220000
+DTEND;TZID=Asia/Kolkata:20260418T073000
+SUMMARY:S3 (22:00–07:30)
+DESCRIPTION:Colleagues in same shift:\n\nPrevious shift:\n- Mitali Jha\n- Poojitha Sankrana\n- Chamundi P\n- Supreetha\n- Nirmalraj C\n- Hansika S\n\nNext shift:\n- Abishek Selvaraj\n- Diksha
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20260418
+DTEND;VALUE=DATE:20260419
+SUMMARY:Off
+DESCRIPTION:Working colleagues today:\n- Lakshmi Prasanna (S3)\n- Abishek Selvaraj (S1)\n- Lalit Kumar (S3)\n- Poojitha Sankrana (S2)\n- Chamundi P (S2)\n- Diksha (S1)\n- Nirmalraj C (EVE)
+COLOR:#33B679
+X-GOOGLE-CALENDAR-COLOR:#33B679
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20260419
+DTEND;VALUE=DATE:20260420
+SUMMARY:Off
+DESCRIPTION:Working colleagues today:\n- Lakshmi Prasanna (S3)\n- Abishek Selvaraj (S1)\n- Tamanna Tyagi (S1)\n- Lalit Kumar (S3)\n- Poojitha Sankrana (S2)\n- Chamundi P (S2)
+COLOR:#33B679
+X-GOOGLE-CALENDAR-COLOR:#33B679
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Asia/Kolkata:20260420T140000
+DTEND;TZID=Asia/Kolkata:20260420T233000
+SUMMARY:S2 (14:00–23:30)
+DESCRIPTION:Colleagues in same shift:\n- Kundan Verma\n- Chamundi P\n- Adhila P\n- Nirmalraj C\n- Hansika S\n\nPrevious shift:\n- Abishek Selvaraj\n- Tamanna Tyagi\n- Mitali Jha\n- Diksha\n- Supreetha\n\nNext shift:\n- Lakshmi Prasanna
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Asia/Kolkata:20260421T140000
+DTEND;TZID=Asia/Kolkata:20260421T233000
+SUMMARY:S2 (14:00–23:30)
+DESCRIPTION:Colleagues in same shift:\n- Kundan Verma\n- Chamundi P\n- Adhila P\n- Nirmalraj C\n- Hansika S\n\nPrevious shift:\n- Abishek Selvaraj\n- Tamanna Tyagi\n- Mitali Jha\n- Diksha\n- Supreetha\n\nNext shift:\n- Lakshmi Prasanna
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Asia/Kolkata:20260422T140000
+DTEND;TZID=Asia/Kolkata:20260422T233000
+SUMMARY:S2 (14:00–23:30)
+DESCRIPTION:Colleagues in same shift:\n- Kundan Verma\n- Lalit Kumar\n- Adhila P\n- Nirmalraj C\n- Hansika S\n\nPrevious shift:\n- Abishek Selvaraj\n- Tamanna Tyagi\n- Mitali Jha\n- Poojitha Sankrana\n- Supreetha\n\nNext shift:\n- Lakshmi Prasanna
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Asia/Kolkata:20260423T140000
+DTEND;TZID=Asia/Kolkata:20260423T233000
+SUMMARY:S2 (14:00–23:30)
+DESCRIPTION:Colleagues in same shift:\n- Kundan Verma\n- Adhila P\n- Nirmalraj C\n- Hansika S\n\nPrevious shift:\n- Tamanna Tyagi\n- Mitali Jha\n- Poojitha Sankrana\n- Supreetha\n\nNext shift:\n- Lalit Kumar
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Asia/Kolkata:20260424T140000
+DTEND;TZID=Asia/Kolkata:20260424T233000
+SUMMARY:S2 (14:00–23:30)
+DESCRIPTION:Colleagues in same shift:\n- Kundan Verma\n- Diksha\n- Adhila P\n- Nirmalraj C\n- Hansika S\n\nPrevious shift:\n- Poojitha Sankrana\n- Chamundi P\n- Supreetha\n\nNext shift:\n- Lalit Kumar
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20260425
+DTEND;VALUE=DATE:20260426
+SUMMARY:Off
+DESCRIPTION:Working colleagues today:\n- Lakshmi Prasanna (S1)\n- Abishek Selvaraj (S2)\n- Shashi Patil (S3)\n- Mitali Jha (S3)\n- Chamundi P (S1)\n- Diksha (S2)\n- Hansika S (EVE)
+COLOR:#33B679
+X-GOOGLE-CALENDAR-COLOR:#33B679
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20260426
+DTEND;VALUE=DATE:20260427
+SUMMARY:Off
+DESCRIPTION:Working colleagues today:\n- Lakshmi Prasanna (S1)\n- Abishek Selvaraj (S2)\n- Tamanna Tyagi (S1)\n- Shashi Patil (S3)\n- Mitali Jha (S3)\n- Chamundi P (S1)\n- Diksha (S2)
+COLOR:#33B679
+X-GOOGLE-CALENDAR-COLOR:#33B679
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Asia/Kolkata:20260427T060000
+DTEND;TZID=Asia/Kolkata:20260427T153000
+SUMMARY:S1 (06:00–15:30)
+DESCRIPTION:Colleagues in same shift:\n- Lakshmi Prasanna\n- Tamanna Tyagi\n- Chamundi P\n- Adhila P\n\nPrevious shift:\n- Shashi Patil\n- Mitali Jha\n\nNext shift:\n- Abishek Selvaraj\n- Kundan Verma\n- Lalit Kumar\n- Diksha\n- Supreetha\n- Nirmalraj C\n- Hansika S
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Asia/Kolkata:20260428T060000
+DTEND;TZID=Asia/Kolkata:20260428T153000
+SUMMARY:S1 (06:00–15:30)
+DESCRIPTION:Colleagues in same shift:\n- Lakshmi Prasanna\n- Tamanna Tyagi\n- Chamundi P\n- Adhila P\n\nPrevious shift:\n- Shashi Patil\n\nNext shift:\n- Abishek Selvaraj\n- Kundan Verma\n- Lalit Kumar\n- Diksha\n- Supreetha\n- Nirmalraj C\n- Hansika S
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Asia/Kolkata:20260429T060000
+DTEND;TZID=Asia/Kolkata:20260429T153000
+SUMMARY:S1 (06:00–15:30)
+DESCRIPTION:Colleagues in same shift:\n- Lakshmi Prasanna\n- Tamanna Tyagi\n- Adhila P\n\nPrevious shift:\n- Shashi Patil\n\nNext shift:\n- Abishek Selvaraj\n- Kundan Verma\n- Lalit Kumar\n- Mitali Jha\n- Supreetha\n- Nirmalraj C\n- Hansika S
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Asia/Kolkata:20260430T060000
+DTEND;TZID=Asia/Kolkata:20260430T153000
+SUMMARY:S1 (06:00–15:30)
+DESCRIPTION:Colleagues in same shift:\n- Kundan Verma\n- Adhila P\n\nPrevious shift:\n- Shashi Patil\n\nNext shift:\n- Lalit Kumar\n- Mitali Jha\n- Chamundi P\n- Supreetha\n- Nirmalraj C\n- Hansika S
+END:VEVENT
+END:VCALENDAR
