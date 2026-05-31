@@ -46,11 +46,13 @@ def find_column(columns: list[str], candidates: list[str]) -> str | None:
 
 
 def get_columns(frame: pd.DataFrame) -> dict[str, str | None]:
+    """Map roster headers to the standard field names we expect."""
     columns = list(frame.columns)
     return {key: find_column(columns, candidates) for key, candidates in DEFAULT_COLUMNS.items()}
 
 
 def parse_date(value: Any) -> date | None:
+    """Normalize a roster value into a date object, if possible."""
     if pd.isna(value):
         return None
     if isinstance(value, date) and not isinstance(value, datetime):
@@ -60,6 +62,7 @@ def parse_date(value: Any) -> date | None:
 
 
 def parse_time(value: Any) -> time | None:
+    """Normalize a roster value into a time object, if possible."""
     if pd.isna(value) or value == "":
         return None
     if isinstance(value, datetime):
@@ -131,19 +134,56 @@ def generate_ics_from_excel(
     output_path = Path(output_path)
 
     frame = pd.read_excel(input_path, sheet_name=sheet_name, engine="openpyxl")
+    # If multiple sheets were read, try to auto-select the sheet that
+    # contains a detectable date column instead of blindly picking the
+    # first sheet (helps when workbooks contain legend sheets).
     if isinstance(frame, dict):
         if not frame:
             raise ValueError("The roster file contains no sheets.")
-        frame = next(iter(frame.values()))
+        if sheet_name is None:
+            selected = None
+            for name, df in frame.items():
+                try:
+                    mapping = get_columns(df)
+                    if mapping.get("date") is not None:
+                        selected = df
+                        break
+                except Exception:
+                    continue
+            if selected is None:
+                # Fall back to first sheet if no date header is detected.
+                frame = next(iter(frame.values()))
+            else:
+                frame = selected
+        else:
+            frame = next(iter(frame.values()))
 
     if frame.empty:
         raise ValueError("The roster file contains no rows.")
 
     mapping = get_columns(frame)
     if mapping["date"] is None:
+        # Helpful debug: show what headers were detected to aid mapping
+        detected = [str(c) for c in frame.columns]
+        print("Could not find a date column. Detected headers:")
+        for h in detected:
+            print(" -", h)
+        # Also show a sample of rows to help diagnose
+        try:
+            print(frame.head(5).to_string(index=False))
+        except Exception:
+            pass
         raise ValueError("Could not find a date column in the roster file.")
 
-    events = [build_event(row, mapping) for _, row in frame.iterrows()]
+    events = []
+    for idx, row in frame.iterrows():
+        try:
+            evt = build_event(row, mapping)
+            events.append(evt)
+        except Exception as exc:
+            # Skip rows that can't be parsed (e.g., legend rows or blank lines)
+            print(f"Skipping row {idx}: {exc}")
+            continue
     calendar_text = "BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//local_agent_001//Roster ICS Export//EN\r\n"
     calendar_text += "\r\n".join(events)
     calendar_text += "\r\nEND:VCALENDAR\r\n"
@@ -161,13 +201,36 @@ def generate_ics_from_roster_matrix(
     input_path = Path(input_path)
     output_path = Path(output_path)
 
-    frame = pd.read_excel(input_path, engine="openpyxl")
-    if isinstance(frame, dict):
-        if not frame:
-            raise ValueError("The roster file contains no sheets.")
-        frame = next(iter(frame.values()))
+    # Read all sheets and pick the one with the most date-like headers
+    xls = pd.read_excel(input_path, sheet_name=None, engine="openpyxl")
+    if not xls:
+        raise ValueError("The roster file contains no sheets.")
 
-    if frame.empty:
+    def is_date_like(val: Any) -> bool:
+        if isinstance(val, date):
+            return True
+        try:
+            if pd.isna(val):
+                return False
+        except Exception:
+            pass
+        try:
+            dateutil_parser.parse(str(val))
+            return True
+        except Exception:
+            return False
+
+    best = None
+    best_score = -1
+    for name, df in xls.items():
+        cols = list(df.columns)
+        score = sum(1 for c in cols if is_date_like(c))
+        if score > best_score:
+            best_score = score
+            best = df
+    frame = best
+
+    if frame is None or frame.empty:
         raise ValueError("The roster file contains no rows.")
 
     # Assume first column is 'Date' or names, but actually it's pivoted
@@ -339,23 +402,63 @@ def build_event_from_shift(event_date: date, shift_info: dict, person: str, desc
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Convert a roster Excel file into an importable .ics calendar file.")
-    parser.add_argument("input", help="Input roster Excel file path.")
-    parser.add_argument("output", help="Output .ics file path.")
+    parser.add_argument("input", nargs="?", help="Input roster Excel file path.")
+    parser.add_argument("output", nargs="?", help="Output .ics file path.")
     parser.add_argument("--sheet", default=None, help="Optional Excel sheet name.")
     parser.add_argument("--person", default=None, help="Optional person name to filter events for (matrix format only).")
+    parser.add_argument("--list-sheets", action="store_true", help="List sheets in the input workbook and exit.")
     return parser.parse_args()
 
 
 def main() -> None:
     args = parse_args()
-    # Detect if it's matrix format (columns are dates)
-    frame = pd.read_excel(args.input, engine="openpyxl")
-    if isinstance(frame, dict):
-        frame = next(iter(frame.values()))
+
+    if args.list_sheets:
+        if not args.input:
+            print("Please provide an input workbook path to list sheets.")
+            return
+        try:
+            xls = pd.read_excel(args.input, sheet_name=None, engine="openpyxl")
+            print("Sheets:")
+            for name in xls.keys():
+                print(" -", name)
+        except Exception as exc:
+            print("Failed to read workbook:", exc)
+        return
+
+    # Read all sheets and try to pick the one that looks like the roster matrix
+    xls = pd.read_excel(args.input, sheet_name=None, engine="openpyxl")
+    frame = None
+    def is_date_like(val: Any) -> bool:
+        if isinstance(val, date):
+            return True
+        try:
+            if pd.isna(val):
+                return False
+        except Exception:
+            pass
+        try:
+            dateutil_parser.parse(str(val))
+            return True
+        except Exception:
+            return False
+
+    # Choose the sheet with the most date-like column headers.
+    # This helps select the data sheet instead of a legend/metadata sheet.
+    best_score = -1
+    for name, df in xls.items():
+        cols = list(df.columns)
+        score = sum(1 for c in cols if is_date_like(c))
+        if score > best_score:
+            best_score = score
+            frame = df
+    if frame is None:
+        raise ValueError("The roster file contains no sheets.")
     columns = list(frame.columns)
-    # If many columns are dates, assume matrix format
-    date_columns = [c for c in columns if isinstance(c, date)]
-    if len(date_columns) > 10:  # Arbitrary threshold
+
+    date_like_columns = [c for c in columns if is_date_like(c)]
+    # Heuristic: if more than 3 date-like columns, treat as matrix format.
+    if len(date_like_columns) > 3:
         result = generate_ics_from_roster_matrix(args.input, args.output, person_name=args.person)
     else:
         result = generate_ics_from_excel(args.input, args.output, sheet_name=args.sheet)
