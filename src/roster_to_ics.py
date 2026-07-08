@@ -331,7 +331,7 @@ def build_event_from_shift(event_date: date, shift_info: dict, person: str, desc
             shift_code = code
             break
 
-    if shift_code:
+    if shift_code and shift_code in {"S1", "S2", "S3", "EVE"}:
         desc_parts = []
 
         # Colleagues in same shift
@@ -380,15 +380,21 @@ def build_event_from_shift(event_date: date, shift_info: dict, person: str, desc
 
         lines.append("DESCRIPTION:" + "\\n".join(desc_parts))
     else:
-        # For OFF/L etc., show working colleagues
-        working = []
+        # For OFF/L/PH/AL etc., group colleagues by their shift while the current person is off.
+        shift_groups: dict[str, list[str]] = {"S1": [], "S2": [], "EVE": [], "S3": [], "G": []}
         for name in all_names:
+            if name == person:
+                continue
             today_shift = all_shifts.get(name, [])[date_index] if date_index < len(all_shifts.get(name, [])) else ""
-            if today_shift in {"S1", "G", "S2", "EVE", "S3"}:
-                working.append(f"{name} ({today_shift})")
+            if today_shift in shift_groups:
+                shift_groups[today_shift].append(name)
 
-        desc_parts = ["Working colleagues today:"]
-        desc_parts.extend(f"- {w}" for w in working)
+        desc_parts = []
+        for code in ["S1", "S2", "EVE", "S3", "G"]:
+            desc_parts.append(f"Colleagues in shift {code}:")
+            if shift_groups[code]:
+                desc_parts.extend(f"- {n}" for n in shift_groups[code])
+
         lines.append("DESCRIPTION:" + "\\n".join(desc_parts))
 
     # Add color for OFF days

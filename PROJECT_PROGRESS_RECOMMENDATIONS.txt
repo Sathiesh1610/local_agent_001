@@ -1,0 +1,44 @@
+Project: local_agent_001 - Progress Tracking Recommendations
+Date: 2026-06-01
+
+Project summary:
+- Roster-to-ICS converter (`src/roster_to_ics.py`) that converts Excel rosters to .ics.
+- Local agent REPL (`src/local_agent.py`) that invokes the converter with a "Generate Roster" command.
+- Samples, tests, and supporting files in the workspace root, `samples/`, `roster/` and `src/`.
+
+Recommended options to track progress (short descriptions + quick start):
+
+1) Lightweight Markdown/TODO files (fast, local)
+- Create TODO lists: `TODO.md` / `IN_PROGRESS.md` / `DONE.md` in the repo root.
+- Use `- [ ]` and `- [x]` task list syntax. Good for minimal overhead and quick capture.
+
+2) Git-based tracking (integrates with workflow)
+- Use clear branch names and commit messages; add `CHANGELOG.md` for release notes.
+- Use GitHub Issues & Projects (if repo hosted) to track tasks, assign, label, and link commits.
+
+3) Small CLI tracker (recommended first build)
+- Single-file Python CLI (`src/progress.py`) backed by `progress.json` or SQLite (`progress.db`).
+- Commands: `add`, `list`, `start`, `complete`, `remove`, `export`.
+- Pros: lightweight, versioned with code, easy to extend into CI hooks or snapshot commits.
+- Quick start: `python src/progress.py add "Write docs"` and `python src/progress.py list`.
+
+4) Simple web dashboard (Flask / FastAPI)
+- Build `src/progress_app.py` + SQLite; provide Kanban views and export.
+- Pros: visual and shareable. Cons: heavier dependencies and runtime.
+
+5) Hybrid approach (file + script + remote board)
+- Keep `progress.json` in repo; sync with GitHub Issues or Trello via a small sync script.
+- Use a daily snapshot script that commits `progress_summary.md` to the repo for historical trace.
+
+Recommended immediate next step:
+- Implement option (3) a simple Python CLI tracker in `src/progress.py` storing tasks in `progress.json`.
+- Benefits: quick to implement, no external services, easy to extend into a web UI later.
+- I can implement this now (CLI file, example tasks, tests, and update `requirements.txt`).
+
+Implementation notes and schema suggestion:
+- Task schema example:
+  { "id": 1, "title": "Write docs", "description": "Update README", "status": "backlog", "owner": "", "created_at": "2026-06-01T10:00:00Z", "started_at": null, "completed_at": null, "notes": [] }
+- Export idea: `python src/progress.py export --md progress.md` to produce a snapshot for review.
+- Optional hook: nightly/CI snapshot that commits `progress_snapshots/progress-YYYYMMDD.md`.
+
+If you want me to build the CLI now, tell me and I will scaffold `src/progress.py`, add a simple `progress.json` example, and run the tests.
