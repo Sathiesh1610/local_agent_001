@@ -16,7 +16,7 @@ A local agent scaffold for roster processing and calendar export.
 2. Run `python src/roster_to_ics.py` to automatically use the latest month-stamped roster in `roster/` and generate `samples/<Name>_MMMM.ics`.
 3. For a single person output, add `--person "Sathiesh M"`.
 4. Alternatively use the local agent REPL: `python src/local_agent.py`, then type `Generate Roster <input> <output> --person "Sathiesh M"`.
-5. Optionally list sheets in a workbook with `python src/roster_to_ics.py --list-sheets roster/Roster-June 26_UPD.xlsx`.
+5. Optionally list sheets in a workbook with `python src/roster_to_ics.py --list-sheets "roster/Roster-October 26_UPD.xlsx"`.
 6. Import the generated `.ics` file into Google Calendar or another calendar app.
 
 The latest roster is selected by the year and month in its filename, not by
@@ -38,7 +38,7 @@ Each synchronized event has a private source ID, allowing later imports to updat
 
 ## Supported roster formats
 
-- **Matrix format** (like Roster-April 26_UPD.xlsx): People as rows, dates as columns, shift codes in cells.
+- **Matrix format** (like the month-stamped workbooks in `roster/`): People as rows, dates as columns, shift codes in cells.
 - **Event format** (like sample_roster.xlsx): Each row is an event with date, start, end, summary columns.
 
 Shift codes are mapped to times (S1=06:00-15:30, S2=14:00-23:30, S3=22:00-07:30, EVE=17:00-02:30, G=09:00-18:30, OFF=all day, etc.).
@@ -49,7 +49,7 @@ Shift codes are mapped to times (S1=06:00-15:30, S2=14:00-23:30, S3=22:00-07:30,
 - **Timezone support**: Events use Asia/Kolkata timezone.
 - **Color coding**: OFF days get green color in Google Calendar.
 - **Person filtering**: Generate calendar for specific team members only.
-- **Example output**: `samples/sathiesh_m.ics` is generated for `Sathiesh M`.
+- **Example output**: `samples/Sathiesh M_October.ics` is generated for `Sathiesh M`.
 
 ## Next steps
 
@@ -60,5 +60,5 @@ Shift codes are mapped to times (S1=06:00-15:30, S2=14:00-23:30, S3=22:00-07:30,
 
 ## Run in VS Code
 
-- Use **Terminal > Run Task...** and choose `Run roster-to-ics` to generate `samples/run_output.ics`.
+- Use **Terminal > Run Task...** and choose `Run roster-to-ics` to generate an output named `samples/<Name>_MMMM.ics`.
 - Use **Run and Debug** and select `Python: Run roster_to_ics` to execute the main conversion inside VS Code.

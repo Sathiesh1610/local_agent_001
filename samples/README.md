@@ -1,15 +1,6 @@
-# Sample Input and Output
+# Calendar exports
 
-Drop your sample roster Excel file and existing .ics file here for the agent to inspect.
-
-- Place example roster files in this folder.
-- Place your current .ics export here too.
-- Use `src/roster_to_ics.py` to generate a new `.ics` file from your roster.
-
-Example:
-- `sample_roster.xlsx` (event-per-row format)
-- `sample_calendar.ics` (generated from sample_roster.xlsx)
-- `Roster-April 26_UPD.xlsx` (matrix format: people x dates)
-- `Shift.ics` (existing calendar export from roster)
-- `generated_sathiesh.ics` (generated for Sathiesh M from Roster-April 26_UPD.xlsx)
-- `improved_sathiesh.ics` (enhanced version with detailed shift transition info)
+Place generated `.ics` files in this folder. Put monthly Excel roster workbooks
+in `../roster/`, using names such as `Roster-October 26_UPD.xlsx`. Run
+`python src/roster_to_ics.py` from the project root to select the latest
+month-stamped workbook and generate `samples/<Name>_MMMM.ics`.

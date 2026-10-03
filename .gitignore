@@ -3,6 +3,9 @@ __pycache__/
 *.pyo
 *.pyd
 .env
+credentials.json
+token.json
+google-calendar-token.json
 venv/
 .idea/
 .vscode/
