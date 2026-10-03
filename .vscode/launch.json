@@ -1,0 +1,23 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Python: Run roster_to_ics",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/src/roster_to_ics.py",
+      "console": "integratedTerminal",
+      "args": [
+        "--person",
+        "Sathiesh M"
+      ]
+    },
+    {
+      "name": "Python: Run local_agent.py",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/src/local_agent.py",
+      "console": "integratedTerminal"
+    }
+  ]
+}

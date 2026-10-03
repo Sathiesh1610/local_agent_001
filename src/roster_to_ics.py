@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import re
 import uuid
 from datetime import datetime, date, time, timezone, timedelta
 from pathlib import Path
@@ -32,9 +33,47 @@ SHIFT_MAPPINGS = {
     "AL": {"all_day": True, "summary": "Annual Leave"},
 }
 
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+ROSTER_FILENAME_PATTERN = re.compile(
+    r"^Roster-([A-Za-z]+) (\d{2}|\d{4})_UPD\.xlsx$", re.IGNORECASE
+)
+
 
 def normalize_header(value: str) -> str:
     return str(value).strip().lower()
+
+
+def get_roster_period(path: Path) -> tuple[int, int, str] | None:
+    """Return year, month, and full month name for a month-stamped roster filename."""
+    match = ROSTER_FILENAME_PATTERN.fullmatch(path.name)
+    if match is None:
+        return None
+
+    try:
+        month = datetime.strptime(match.group(1), "%B").month
+    except ValueError:
+        return None
+
+    year_text = match.group(2)
+    year = int(year_text)
+    if len(year_text) == 2:
+        year += 2000
+    return year, month, datetime(year, month, 1).strftime("%B")
+
+
+def find_latest_roster(roster_dir: Path) -> Path:
+    """Find the chronologically latest roster matching the expected filename convention."""
+    dated_rosters = [
+        (period[:2], path)
+        for path in roster_dir.glob("Roster-*_UPD.xlsx")
+        if (period := get_roster_period(path)) is not None
+    ]
+    if not dated_rosters:
+        raise FileNotFoundError(
+            f"No month-stamped roster files found in {roster_dir}. "
+            "Expected names like 'Roster-October 26_UPD.xlsx'."
+        )
+    return max(dated_rosters, key=lambda item: item[0])[1]
 
 
 def find_column(columns: list[str], candidates: list[str]) -> str | None:
@@ -331,7 +370,7 @@ def build_event_from_shift(event_date: date, shift_info: dict, person: str, desc
             shift_code = code
             break
 
-    if shift_code and shift_code in {"S1", "S2", "S3", "EVE"}:
+    if shift_code and shift_code in {"S1", "S2", "S3"}:
         desc_parts = []
 
         # Colleagues in same shift
@@ -380,7 +419,7 @@ def build_event_from_shift(event_date: date, shift_info: dict, person: str, desc
 
         lines.append("DESCRIPTION:" + "\\n".join(desc_parts))
     else:
-        # For OFF/L/PH/AL etc., group colleagues by their shift while the current person is off.
+        # For OFF/L/PH/AL and special shifts like EVE/G, group colleagues by their shift.
         shift_groups: dict[str, list[str]] = {"S1": [], "S2": [], "EVE": [], "S3": [], "G": []}
         for name in all_names:
             if name == person:
@@ -411,7 +450,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("input", nargs="?", help="Input roster Excel file path.")
     parser.add_argument("output", nargs="?", help="Output .ics file path.")
     parser.add_argument("--sheet", default=None, help="Optional Excel sheet name.")
-    parser.add_argument("--person", default=None, help="Optional person name to filter events for (matrix format only).")
+    parser.add_argument("--person", default="Sathiesh M", help="Optional person name to filter events for (matrix format only). Defaults to Sathiesh M.")
     parser.add_argument("--list-sheets", action="store_true", help="List sheets in the input workbook and exit.")
     return parser.parse_args()
 
@@ -432,8 +471,24 @@ def main() -> None:
             print("Failed to read workbook:", exc)
         return
 
+    input_path = Path(args.input) if args.input else find_latest_roster(PROJECT_ROOT / "roster")
+    if args.input is None:
+        print(f"Using latest roster: {input_path}")
+
+    if args.output:
+        output_path = Path(args.output)
+    else:
+        period = get_roster_period(input_path)
+        if period is None:
+            raise ValueError(
+                f"Cannot determine the output month from '{input_path.name}'. "
+                "Specify an output path or use a roster named like "
+                "'Roster-October 26_UPD.xlsx'."
+            )
+        output_path = PROJECT_ROOT / "samples" / f"{args.person}_{period[2]}.ics"
+
     # Read all sheets and try to pick the one that looks like the roster matrix
-    xls = pd.read_excel(args.input, sheet_name=None, engine="openpyxl")
+    xls = pd.read_excel(input_path, sheet_name=None, engine="openpyxl")
     frame = None
     def is_date_like(val: Any) -> bool:
         if isinstance(val, date):
@@ -465,9 +520,9 @@ def main() -> None:
     date_like_columns = [c for c in columns if is_date_like(c)]
     # Heuristic: if more than 3 date-like columns, treat as matrix format.
     if len(date_like_columns) > 3:
-        result = generate_ics_from_roster_matrix(args.input, args.output, person_name=args.person)
+        result = generate_ics_from_roster_matrix(input_path, output_path, person_name=args.person or "Sathiesh M")
     else:
-        result = generate_ics_from_excel(args.input, args.output, sheet_name=args.sheet)
+        result = generate_ics_from_excel(input_path, output_path, sheet_name=args.sheet)
     print(f"Generated calendar file: {result}")
 
 
